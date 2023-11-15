@@ -5,7 +5,7 @@ import requests
 #Milplane Endpoint and Headers
 mil_ads = 'https://adsbexchange-com1.p.rapidapi.com/v2/mil/' #Military plane endpoints
 IEX_ads = 'https://adsbexchange-com1.p.rapidapi.com/v2/lat/27.943721/lon/-82.537932/dist/5/' #IEX HQ Endpoint
-ads_headers = {	"X-RapidAPI-Key": "INSERT KEY",	"X-RapidAPI-Host": "adsbexchange-com1.p.rapidapi.com" }
+ads_headers = {	"X-RapidAPI-Key": "25649f62f2msh3808137a2442080p186039jsn6c56c32c82f1",	"X-RapidAPI-Host": "adsbexchange-com1.p.rapidapi.com" }
 
 #Method for returning endpoint into JSON
 def get_json_response(url, headers):
@@ -24,7 +24,6 @@ app = FastAPI()
 @app.get("/")
 async def index():
     return get_json_response(IEX_ads, ads_headers)
-
 
 #MilPlane, This returns Milplane
 @app.get("/milplane")
