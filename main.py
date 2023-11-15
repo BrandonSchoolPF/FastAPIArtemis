@@ -2,37 +2,33 @@ from fastapi import FastAPI
 import requests
 
 #Initializing API address and API Key
-API_Add = 'https://adsbexchange-com1.p.rapidapi.com/v2/lat/27.943721/lon/-82.537932/dist/5/'
-#API_Host = "X-RapidAPI-Host": "adsbexchange-com1.p.rapidapi.com"
-headers = {	"X-RapidAPI-Key": "INSERT KEY"}
+#Milplane Endpoint and Headers
+mil_ads = 'https://adsbexchange-com1.p.rapidapi.com/v2/mil/' #Military plane endpoints
+IEX_ads = 'https://adsbexchange-com1.p.rapidapi.com/v2/lat/27.943721/lon/-82.537932/dist/5/' #IEX HQ Endpoint
+ads_headers = {	"X-RapidAPI-Key": "INSERT KEY",	"X-RapidAPI-Host": "adsbexchange-com1.p.rapidapi.com" }
+
+#Method for returning endpoint into JSON
+def get_json_response(url, headers):
+    url = f"{url}" #Endpoint should be above 'Mil', 'IEX'...
+    response = requests.get(url, headers=headers)
+    return response.json()
 
 #Iniitializing Fast App
 app = FastAPI()
 
-#Homepage
+#Homepage, this returns IEX HQ
 @app.get("/")
-def index():
-    req = requests.get(API_Add, headers=headers)
-    data = req.json()
-    return data
+async def index():
+    return get_json_response(IEX_ads, ads_headers)
 
 
-#MilPlane
+#MilPlane, This returns Milplane
 @app.get("/milplane")
-def MilPlane():
+async def MilPlane():
+    return get_json_response(mil_ads, ads_headers)
 
-    url_mil = "https://adsbexchange-com1.p.rapidapi.com/v2/mil/"
 
-    headers_mil = {
-	"X-RapidAPI-Key": "INSERT KEY",
-	"X-RapidAPI-Host": "adsbexchange-com1.p.rapidapi.com"
-        }
-    
-    req_mil = requests.get(url_mil, headers=headers_mil)
+#When updating code 
 
-    data_mil = req_mil.json()
-
-    return data_mil
-
-#To Run docker: docker compose up --build
-#https://dev.to/rajeshj3/dockerize-fastapi-project-like-a-pro-step-by-step-tutorial-7i8
+#docker-compose build 
+#docker-compose up -d
