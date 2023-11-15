@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 import requests
+#This is where get_json_response comes from
+from functions import *
 
 #Initializing API address and API Key
 
@@ -7,21 +9,9 @@ import requests
 #Milplane Endpoint and Headers
 mil_ads = 'https://adsbexchange-com1.p.rapidapi.com/v2/mil/' #Military plane endpoints
 IEX_ads = 'https://adsbexchange-com1.p.rapidapi.com/v2/lat/27.943721/lon/-82.537932/dist/5/' #IEX HQ Endpoint
-ads_headers = {	"X-RapidAPI-Key": "INSERT KEY",	"X-RapidAPI-Host": "adsbexchange-com1.p.rapidapi.com" }
+ads_headers = {	"X-RapidAPI-Key": "Insert Key",	"X-RapidAPI-Host": "adsbexchange-com1.p.rapidapi.com" }
 #####ADS-B######
 
-
-
-
-#Method for returning endpoint into JSON
-def get_json_response(url, headers):
-    url = f"{url}" #Endpoint should be above 'Mil', 'IEX'...
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        # Handle the case where the API request failed
-        print(f"Request failed with status code: {response.status_code}")
 
 #Iniitializing Fast App
 app = FastAPI()
@@ -35,9 +25,3 @@ async def index():
 @app.get("/milplane")
 async def MilPlane():
     return get_json_response(mil_ads, ads_headers)
-
-
-#When updating code 
-
-#docker-compose build 
-#docker-compose up -d
