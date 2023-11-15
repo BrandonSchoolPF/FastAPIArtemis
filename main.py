@@ -11,7 +11,11 @@ ads_headers = {	"X-RapidAPI-Key": "INSERT KEY",	"X-RapidAPI-Host": "adsbexchange
 def get_json_response(url, headers):
     url = f"{url}" #Endpoint should be above 'Mil', 'IEX'...
     response = requests.get(url, headers=headers)
-    return response.json()
+    if response.status_code == 200:
+        return response.json()
+    else:
+        # Handle the case where the API request failed
+        print(f"Request failed with status code: {response.status_code}")
 
 #Iniitializing Fast App
 app = FastAPI()
