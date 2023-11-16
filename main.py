@@ -1,55 +1,70 @@
 # Import necessary libraries
-import uvicorn
-import requests
-from fastapi import FastAPI, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI
 from dotenv import load_dotenv
 import os
+from functions import *
+from config import RAPIDAPI_KEY, RAPIDAPI_HOST, API_STARTER, IEX_LAT_LON, IEX_API_URL, INTERVAL_SECONDS
 
-#Iniitializing Fast App
-app = FastAPI()
 
 # Load environment variables from .env file
 load_dotenv()
 
-# Define constants and set up headers for API requests
+# Define constants and set up headers for API requests``
 PORT = 8000
-API_KEY = os.getenv('API_KEY')
+RAPIDAPI_KEY = os.getenv('RAPIDAPI_KEY')
 
 ##ADS-B##
-mil_ads = "https://adsbexchange-com1.p.rapidapi.com/v2/mil"
-IEX_ads = "https://adsbexchange-com1.p.rapidapi.com/v2/lat/27.943721/lon/-82.537932/dist/5/"
+mil_ads = "https://adsbexchange-com1.p.rapidapi.com/v2/mil" # Tagged Military plane endpoints
+IEX_ads = "https://adsbexchange-com1.p.rapidapi.com/v2/lat/27.943721/lon/-82.537932/dist/5/" # IEX HQ Endpoint
 ads_headers = {
-    "X-RapidAPI-Key": API_KEY,
+    "X-RapidAPI-Key": RAPIDAPI_KEY,
     "X-RapidAPI-Host": 'adsbexchange-com1.p.rapidapi.com'
 }
 
-# Method for making API requests and handling responses
-def create_api_reqest(url, headers):
-    url = f"{url}"
-    
-    # Print the API request URL for debugging purposes1
-    print("Making API call to: ", url)
+#Iniitializing Fast App
+app = FastAPI()
 
-    # Make an HTTP GET request to the API with the specified headers
-    response = requests.get(url, headers=headers)
+# Obtain Refresh Times (In Seconds)
+@app.get("/times")
+async def refresh_times():
+    return {"ADS-B Calls": INTERVAL_SECONDS}
 
-    if response.status_code == 200:
-        try:
-            # Return a JSON response to view in browser
-            return response.json()
-        except ValueError:
-            raise HTTPException(status_code=500, detail="Response is not valid JSON.")
-    else:
-        # Raise an exception with the appropriate status code and error message
-        raise HTTPException(status_code=response.status_code, detail=f"Request failed with status code: {response.status_code}")
 
-# Define a FastAPI route to handle requests to "/tagged-aircrafts"
-@app.get("/tagged-aircrafts")
-async def get_tagged_aircraft_data():
-    return create_api_reqest(mil_ads, ads_headers)
+#Homepage, this returns IEX HQ
+@app.get("/get_data")
+async def index():
+    return get_json_response(IEX_API_URL, ads_headers)
 
-# Define a FastAPI route to handle requests to "/overhead-iex"
-@app.get("/overhead-iex")
-async def get_overhead_iex_data():
-    return create_api_reqest(IEX_ads, ads_headers)
+#MilPlane, This returns Milplane
+@app.get("/milplane")
+async def MilPlane():
+    return get_json_response(API_STARTER + "/mil/", ads_headers)
+
+# This returns aircraft around the selected number of 
+# nautical (nm) miles
+@app.get("/dist/{int_nm}")
+async def dist(int_nm: int):
+    return get_json_response(API_STARTER + IEX_LAT_LON + f"/dist/{int_nm}", 
+                            ads_headers)                         
+
+# This returns aircraft based on the inputed icao
+@app.get("/icao/{icao}")
+async def icao(icao: str):
+    return get_json_response(API_STARTER + f"/icao/{icao}", ads_headers)
+
+# This returns aircraft based on the inputed hex
+@app.get("/hex/{hex}")
+async def hex(hex: str):
+    return get_json_response(API_STARTER + f"/hex/{hex}", ads_headers)
+
+# This returns aircraft based on the inputed squawk code
+@app.get("/squawk/{squawk}")
+async def squawk(squawk: str):
+    return get_json_response(API_STARTER + f"/sqk/{squawk}", 
+                                ads_headers)
+
+# This returns aircraft based on the inputed squawk code
+@app.get("/callsign/{callsign}")
+async def callsign(callsign: str):
+    return get_json_response(API_STARTER + f"/callsign/{callsign}",
+                                ads_headers)
