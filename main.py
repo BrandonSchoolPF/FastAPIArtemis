@@ -14,16 +14,6 @@ IEX_ads = 'https://adsbexchange-com1.p.rapidapi.com/v2/lat/27.943721/lon/-82.537
 ads_headers = {	"X-RapidAPI-Key": RAPIDAPI_KEY,	"X-RapidAPI-Host": RAPIDAPI_HOST }
 
 
-#Method for returning endpoint into JSON
-def get_json_response(url, headers):
-    url = f"{url}" #Endpoint should be above 'Mil', 'IEX'...
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        # Handle the case where the API request failed
-        print(f"Request failed with status code: {response.status_code}")
-
 #Iniitializing Fast App
 app = FastAPI()
 
@@ -53,8 +43,7 @@ async def dist(int_nm: int):
 # This returns aircraft based on the inputed icao
 @app.get("/icao/{icao}")
 async def icao(icao: str):
-    return get_json_response(API_STARTER + f"/icao/{icao}", 
-                             ads_headers)
+    return get_json_response(API_STARTER + f"/icao/{icao}", ads_headers)
 
 # This returns aircraft based on the inputed hex
 @app.get("/hex/{hex}")
