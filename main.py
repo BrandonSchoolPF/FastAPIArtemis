@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from config import RAPIDAPI_KEY, RAPIDAPI_HOST, API_STARTER, IEX_LAT_LON, IEX_API_URL, INTERVAL_SECONDS
-import requests
 #This is where get_json_response comes from
 from functions import *
+from logger import *
 
 #Initializing API address and API Key
 

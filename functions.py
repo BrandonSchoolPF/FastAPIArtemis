@@ -1,5 +1,4 @@
 #This is designed to hold all of our functions
-from fastapi import FastAPI
 import requests
 from functions import *
 
