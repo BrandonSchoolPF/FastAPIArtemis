@@ -1,7 +1,4 @@
-Certainly! Here's the README content formatted in markdown:
-
-
-FastAPI ADS-B REST API Application
+# FastAPI ADS-B REST API Application
 
 This is a FastAPI-based REST API application that provides access to ADS-B (Automatic Dependent Surveillance–Broadcast) data. It fetches tagged aircraft data from the ADS-B Exchange API and serves it through a FastAPI web server.
 
@@ -45,7 +42,7 @@ API_KEY=your_api_key_here
 To run the application locally, use the following command:
 
 ```bash
-uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 The FastAPI application will be accessible at [http://127.0.0.1:8000](http://127.0.0.1:8000).
@@ -70,6 +67,4 @@ The FastAPI application will be accessible at [http://127.0.0.1:8000](http://127
 
 ## Usage
 
-- Access tagged aircraft data: [http://127.0.0.1:8000/tagged-aircrafts](http://127.0.0.1:8000/tagged-aircrafts)
-
-- Access both coded endpoints using http://127.0.0.1:8000/docs onces your in the swagger ui click "get", "try it out" and then click "execute" to view the response bodies to view the JSON data.
+- Access both coded endpoints using [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs). Once you're in the Swagger UI, click "GET," "Try it out," and then click "Execute" to view the response bodies and see the JSON data.
