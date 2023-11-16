@@ -1,6 +1,8 @@
 #This is designed to hold all of our functions
 from fastapi import FastAPI, HTTPException
 import requests
+from functions import *
+
 import logging
 import datetime;
 
@@ -22,7 +24,6 @@ def get_json_response(url, headers):
         # Raise an exception with the appropriate status code and error message
         raise HTTPException(status_code=response.status_code, detail=f"Request failed with status code: {response.status_code}")
 
-
 #Logging Function
 def configure_logging(): #This sets the logger level
     # Configure logging
@@ -42,3 +43,4 @@ def log_endpoint_access(logger, endpoint_name): #This calls logger with endpoint
     logger.info(f" Making API call to: {endpoint_name} ") #Shows that it was successful
     logger.info(f" Accessing {endpoint_name} endpoint Successful") #What is accesse
     print(f"Accessed the {endpoint_name} endpoint at", ct)
+

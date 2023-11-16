@@ -1,0 +1,11 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+# Linguist overrides
+* linguist-detectable=true
+*.ps1 linguist-detectable=false
+*.psm1 linguist-detectable=false
+*.psd1 linguist-detectable=false
+
+# Exclude Batchfiles
+*.bat linguist-detectable=false
+*.cmd linguist-detectable=false

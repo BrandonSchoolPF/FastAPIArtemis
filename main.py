@@ -1,10 +1,13 @@
 from fastapi import FastAPI
 from config import RAPIDAPI_KEY, RAPIDAPI_HOST, API_STARTER, IEX_LAT_LON, IEX_API_URL, INTERVAL_SECONDS
-import requests
 #This is where get_json_response comes from
 from functions import *
-import datetime
+from dotenv import load_dotenv
+import os
 
+
+load_dotenv()
+RAPIDAPI_KEY = os.getenv("RAPIDAPI_KEY")
 #Initializing API address and API Key
 
 #####ADS-B######
@@ -15,8 +18,11 @@ IEX_ads = 'https://adsbexchange-com1.p.rapidapi.com/v2/lat/27.943721/lon/-82.537
 ads_headers = {	"X-RapidAPI-Key": RAPIDAPI_KEY,	"X-RapidAPI-Host": RAPIDAPI_HOST }
 
 
+
+
 #Iniitializing Fast App
 app = FastAPI()
+
 
 # Obtain Refresh Times (In Seconds)
 @app.get("/times")
