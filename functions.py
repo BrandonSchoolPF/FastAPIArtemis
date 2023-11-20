@@ -1,5 +1,5 @@
 #This is designed to hold all of our functions
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 import requests
 from functions import *
 
@@ -32,12 +32,15 @@ def configure_logging(): #This sets the logger level
 
 logger = configure_logging()
 
-def log_endpoint_access(logger, endpoint_name): #This calls logger with endpoint
+def log_endpoint_access(logger,request: Request, endpoint_name): #This calls logger with endpoint
     #Initiating ct which calls system time
     ct = datetime.datetime.now()
 
-    #ip_address = request.client.host
-    #logger.info(f"Source IP: {ip_address}")
+    # Accessing the client's IP address from the request object
+    ip_address = request.client.host
+
+    # Logging the source IP address to the logger
+    logger.info(f" Source IP: {ip_address}")
 
     #Actual Logging info
     logger.info(f" Making API call to: {endpoint_name} ") #Shows that it was successful
