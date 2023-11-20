@@ -15,7 +15,7 @@ RAPIDAPI_KEY = os.getenv("RAPIDAPI_KEY")
 mil_ads = 'https://adsbexchange-com1.p.rapidapi.com/v2/mil/' #Military plane endpoints
 IEX_ads = 'https://adsbexchange-com1.p.rapidapi.com/v2/lat/27.943721/lon/-82.537932/dist/5/' #IEX HQ Endpoint
 
-ads_headers = {	"X-RapidAPI-Key": "25649f62f2msh3808137a2442080p186039jsn6c56c32c82f",	"X-RapidAPI-Host": "adsbexchange-com1.p.rapidapi.com" }
+ads_headers = {	"X-RapidAPI-Key": RAPIDAPI_KEY,	"X-RapidAPI-Host": RAPIDAPI_HOST}
 
 
 
