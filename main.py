@@ -38,10 +38,12 @@ async def index(request: Request):
     return get_json_response(IEX_API_URL, ads_headers, "get_data", request)
 
 
+
 #MilPlane, This returns Milplane
 @app.get("/milplane")
 async def MilPlane(request: Request):
     return get_json_response(API_STARTER + "/mil/", ads_headers, "milplane", request)
+
 
 # This returns aircraft around the selected number of 
 # nautical (nm) miles
@@ -49,22 +51,33 @@ async def MilPlane(request: Request):
 async def dist(int_nm: int, request: Request):
     return get_json_response(API_STARTER + IEX_LAT_LON + f"/dist/{int_nm}", ads_headers, "dist", request)                         
 
+
+
 # This returns aircraft based on the inputed icao
 @app.get("/icao/{icao}")
 async def icao(icao: str, request: Request):
+
     return get_json_response(API_STARTER + f"/icao/{icao}", ads_headers, "icao", request)
+
+
 
 # This returns aircraft based on the inputed hex
 @app.get("/hex/{hex}")
 async def hex(hex: str, request: Request):
     return get_json_response(API_STARTER + f"/hex/{hex}", ads_headers, "hex", request)
 
+
+
 # This returns aircraft based on the inputed squawk code
 @app.get("/squawk/{squawk}")
 async def squawk(squawk: str, request: Request):
     return get_json_response(API_STARTER + f"/sqk/{squawk}", ads_headers, "squawk", request)
 
+
+
 # This returns aircraft based on the inputed squawk code
 @app.get("/callsign/{callsign}")
 async def callsign(callsign: str, request: Request):
     return get_json_response(API_STARTER + f"/callsign/{callsign}", ads_headers, "callsign", request)
+
+
