@@ -37,6 +37,10 @@ Create a `.env` file in the project root directory and add your API key:
 API_KEY=your_api_key_here
 ```
 
+```env.docker
+API_KEY=your_api_key_here
+```
+
 ### Running the Application
 
 To run the application locally, use the following command:
@@ -49,22 +53,22 @@ The FastAPI application will be accessible at [http://127.0.0.1:8000](http://127
 
 ### Building and Running with Docker
 
-You can also run the application in a Docker container. A Dockerfile is provided for this purpose.
+You can also run the application in a Docker container. A Dockerfile and docker-compose file are provided for this purpose.
 
-Build the Docker image:
+From the fastAPI_app folder, build the Docker image (with docker-compose.yaml):
 
 ```bash
-docker build -t ads-b-fastapi-app .
+docker-compose build
 ```
 
 Run the Docker container:
 
 ```bash
-docker run -dp 127.0.0.1:8000:8000 ads-b-fastapi-app
+docker-compose up -d
 ```
 
 The FastAPI application will be accessible at [http://127.0.0.1:8000](http://127.0.0.1:8000) inside the Docker container.
 
 ## Usage
 
-- Access both coded endpoints using [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs). Once you're in the Swagger UI, click "GET," "Try it out," and then click "Execute" to view the response bodies and see the JSON data.
+- Access all coded endpoints using [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs). Once you're in the Swagger UI, click "GET," "Try it out," and then click "Execute" to view the response bodies and see the JSON data.
