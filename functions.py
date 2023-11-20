@@ -41,6 +41,6 @@ def log_endpoint_access(logger, endpoint_name): #This calls logger with endpoint
 
     #Actual Logging info
     logger.info(f" Making API call to: {endpoint_name} ") #Shows that it was successful
-    logger.info(f" Accessing {endpoint_name} endpoint Successful") #What is accesse
-    print(f"Accessed the {endpoint_name} endpoint at", ct)
+    logger.info(f" Accessing {endpoint_name} endpoint Successful") #What endpoint is being accessed
+    print(f"Accessed the {endpoint_name} endpoint at", ct) #The time the endpoint is being accessed
 
