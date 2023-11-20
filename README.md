@@ -55,7 +55,7 @@ The FastAPI application will be accessible at [http://127.0.0.1:8000](http://127
 
 You can also run the application in a Docker container. A Dockerfile and docker-compose file are provided for this purpose.
 
-Build the Docker image (with docker-compose.yaml):
+From the fastAPI_app folder, build the Docker image (with docker-compose.yaml):
 
 ```bash
 docker-compose build
