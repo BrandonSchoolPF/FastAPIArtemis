@@ -2,7 +2,6 @@
 from fastapi import FastAPI, HTTPException
 import requests
 from functions import *
-
 import logging
 import datetime;
 
